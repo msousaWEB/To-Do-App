@@ -84,6 +84,10 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        if($task->user_id != auth()->user()->id){
+            return view('access-denied');
+        };
+
         return view('task.edit', ['task' => $task]);
     }
 
@@ -109,6 +113,11 @@ class TaskController extends Controller
         $request->validate($rules, $feedback);
         $task->update($request->all());
 
+        
+        if($task->user_id != auth()->user()->id){
+            return view('access-denied');
+        };
+
         return redirect()->route('task.show', ['task' => $task->id]);
     }
 
@@ -120,6 +129,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        if($task->user_id != auth()->user()->id){
+            return view('access-denied');
+        };
     }
 }
