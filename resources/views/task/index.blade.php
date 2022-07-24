@@ -5,7 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Suas tarefas</div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col"><h2>Suas Tarefas</h2></div>
+                        <div class="col" style="text-align: right"><a href="{{route('task.create')}}" class="btn btn-primary">Novo</a></div>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     <table class="table">
