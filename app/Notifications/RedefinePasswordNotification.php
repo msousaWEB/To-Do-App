@@ -12,15 +12,19 @@ class RedefinePasswordNotification extends Notification
 {
     use Queueable;
     public $token;
+    public $email;
+    public $name;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($token, $email, $name)
     {
         $this->token = $token;
+        $this->email = $email;
+        $this->name = $name;
     }
 
     /**
@@ -42,14 +46,16 @@ class RedefinePasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = 'http://localhost:8000/password/reset/'.$this->token;
+        $url = 'http://localhost:8000/password/reset/'.$this->token.'?email='.$this->email;
         $min = config('auth.passwords.'.config('auth.defaults.passwords').'.expire');
         return (new MailMessage)
             ->subject(Lang::get('Recuperação de senha'))
+            ->greeting(Lang::get('Olá, '.$this->name))
             ->line(Lang::get('Recupere a sua senha através do botão de resetar.'))
             ->action(Lang::get('Resetar senha'), $url)
             ->line(Lang::get('Este link expira em :count minutos.', ['count' => $min]))
-            ->line(Lang::get('Por favor, ignore este email caso não tenha solicitado o reset de senha.'));
+            ->line(Lang::get('Por favor, ignore este email caso não tenha solicitado o reset de senha.'))
+            ->salutation('Atenciosamente,To-Do App');
     }
 
     /**
