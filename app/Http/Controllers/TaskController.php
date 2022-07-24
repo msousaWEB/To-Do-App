@@ -28,7 +28,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('task.create');
     }
 
     /**
@@ -39,7 +39,20 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'task' => 'required|min:3|max:200',
+            'date_limit' => 'date',
+        ];
+        $feedback = [
+            'required' => 'Por favor, insira algum texto para tarefa!',
+            'task.min' => 'É nescessário conter no mínimo 3 caracteres.',
+            'task.max' => 'É nescessário conter no máximo 200 caracteres.',
+        ];
+
+        $request->validate($rules, $feedback);
+
+        $task = Task::create($request->all());
+        return redirect()->route('task.show', ['task' => $task]);
     }
 
     /**
@@ -50,7 +63,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        dd($task);
     }
 
     /**
