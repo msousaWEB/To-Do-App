@@ -132,5 +132,8 @@ class TaskController extends Controller
         if($task->user_id != auth()->user()->id){
             return view('access-denied');
         };
+        $task->delete();
+
+        return redirect()->route('task.index');
     }
 }
