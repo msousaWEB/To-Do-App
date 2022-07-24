@@ -20,7 +20,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = auth()->user()->id;
+        $tasks = Task::where('user_id', $user_id)->paginate(5);
+        return view('task.index', ['tasks' => $tasks]);
     }
 
     /**
@@ -57,7 +59,7 @@ class TaskController extends Controller
         $data = $request->all('task', 'date_limit');
         $data['user_id'] = auth()->user()->id;
         
-        $task = Task::create($request->all($data));
+        $task = Task::create($data);
         Mail::to($receiver)->send(new NewTaskMail($task));
         
         return redirect()->route('task.show', ['task' => $task]);
