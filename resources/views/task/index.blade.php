@@ -7,8 +7,13 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col"><h2>Suas Tarefas</h2></div>
-                        <div class="col" style="text-align: right"><a href="{{route('task.create')}}" class="btn btn-primary">Novo</a></div>
+                        <div class="col-6"><h2>Suas Tarefas</h2></div>
+                        <div class="col-6">
+                            <div style="float: right">    
+                                <a href="{{route('task.export')}}" class="btn btn-secondary">XLSX</a>
+                                <a href="{{route('task.create')}}" class="btn btn-primary">Novo</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

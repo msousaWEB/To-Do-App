@@ -6,6 +6,8 @@ use App\Mail\NewTaskMail;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Exports\TaskExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TaskController extends Controller
 {
@@ -135,5 +137,9 @@ class TaskController extends Controller
         $task->delete();
 
         return redirect()->route('task.index');
+    }
+
+    public function export() {
+        return Excel::download(new TaskExport, 'task_list.xlsx');
     }
 }
