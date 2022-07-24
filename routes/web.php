@@ -20,10 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('task', 'App\Http\Controllers\TaskController');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+->name('home')
+->middleware('verified');
+Route::resource('task', 'App\Http\Controllers\TaskController')->middleware('verified');
 Route::get('message-test', function() {
     return new MessageTestMail();
     // Mail::to('matheussousa2130@gmail.com')->send(new MessageTestMail());
