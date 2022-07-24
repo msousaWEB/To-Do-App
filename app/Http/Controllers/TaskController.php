@@ -54,7 +54,10 @@ class TaskController extends Controller
         $request->validate($rules, $feedback);
         $receiver = auth()->user()->email;
 
-        $task = Task::create($request->all());
+        $data = $request->all('task', 'date_limit');
+        $data['user_id'] = auth()->user()->id;
+        
+        $task = Task::create($request->all($data));
         Mail::to($receiver)->send(new NewTaskMail($task));
         
         return redirect()->route('task.show', ['task' => $task]);
