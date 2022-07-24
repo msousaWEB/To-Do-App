@@ -84,7 +84,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        return view('task.edit', ['task' => $task]);
     }
 
     /**
@@ -96,7 +96,20 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $rules = [
+            'task' => 'required|min:3|max:200',
+            'date_limit' => 'date',
+        ];
+        $feedback = [
+            'required' => 'Por favor, insira algum texto para tarefa!',
+            'task.min' => 'É nescessário conter no mínimo 3 caracteres.',
+            'task.max' => 'É nescessário conter no máximo 200 caracteres.',
+        ];
+
+        $request->validate($rules, $feedback);
+        $task->update($request->all());
+
+        return redirect()->route('task.show', ['task' => $task->id]);
     }
 
     /**
