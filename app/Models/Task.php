@@ -9,4 +9,9 @@ class Task extends Model
 {
     use HasFactory;
     protected $fillable = ['task', 'date_limit', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }
