@@ -10,7 +10,8 @@
                         <div class="col-6"><h2>Suas Tarefas</h2></div>
                         <div class="col-6">
                             <div style="float: right">    
-                                <a href="{{route('task.export')}}" class="btn btn-secondary">XLSX</a>
+                                <a href="{{route('task.export', ['extension' => 'xlsx'])}}" class="btn btn-secondary">XLSX</a>
+                                <a href="{{route('task.export', ['extension' => 'csv'])}}" class="btn btn-secondary">CSV</a>
                                 <a href="{{route('task.create')}}" class="btn btn-primary">Novo</a>
                             </div>
                         </div>

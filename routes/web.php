@@ -26,7 +26,7 @@ Auth::routes(['verify' => true]);
 // ->name('home')
 // ->middleware('verified');
 
-Route::get('task/export', 'App\Http\Controllers\TaskController@export')->name('task.export');
+Route::get('task/export/{extension}', 'App\Http\Controllers\TaskController@export')->name('task.export');
 
 Route::resource('task', 'App\Http\Controllers\TaskController')->middleware('verified');
 Route::get('message-test', function() {

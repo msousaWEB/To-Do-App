@@ -139,7 +139,16 @@ class TaskController extends Controller
         return redirect()->route('task.index');
     }
 
-    public function export() {
-        return Excel::download(new TaskExport, 'task_list.xlsx');
+    public function export($extension) {
+        $file = 'task_list';
+        if($extension == 'xlsx'){
+            $file .= '.'.$extension;
+        } elseif ($extension == 'csv') {
+            $file .= '.'.$extension;
+        } else {
+            return redirect()->route('task.index');
+        }
+
+        return Excel::download(new TaskExport, $file);
     }
 }
