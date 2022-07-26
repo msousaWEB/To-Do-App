@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Exports\TaskExport;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class TaskController extends Controller
 {
@@ -139,7 +140,8 @@ class TaskController extends Controller
         return redirect()->route('task.index');
     }
 
-    public function export($extension) {
+    public function export($extension) 
+    {
         
         if(in_array($extension, ['xlsx', 'csv', 'pdf'])){
             return Excel::download(new TaskExport, 'task_list.'.$extension);
@@ -147,5 +149,11 @@ class TaskController extends Controller
             return redirect()->route('task.index');
         }
 
+    }
+
+    public function exporting() 
+    {
+        $pdf = PDF::loadView('task.pdf', []);
+        return $pdf->download('task_list.pdf');
     }
 }
