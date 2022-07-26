@@ -153,7 +153,9 @@ class TaskController extends Controller
 
     public function exporting() 
     {
-        $pdf = PDF::loadView('task.pdf', []);
+        $tasks = auth()->user()->tasks()->get();
+
+        $pdf = PDF::loadView('task.pdf', ['tasks' => $tasks]);
         return $pdf->download('task_list.pdf');
     }
 }
