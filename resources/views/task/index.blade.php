@@ -12,7 +12,7 @@
                             <div style="float: right">    
                                 <a href="{{route('task.export', ['extension' => 'xlsx'])}}" class="btn btn-secondary">XLSX</a>
                                 {{-- <a href="{{route('task.export', ['extension' => 'pdf'])}}" class="btn btn-secondary">PDF</a> --}}
-                                <a href="{{route('task.exporting', ['extension' => 'pdf'])}}" class="btn btn-secondary">DOMPDF</a>
+                                <a href="{{route('task.exporting', ['extension' => 'pdf'])}}" target="_blank" class="btn btn-secondary">DOMPDF</a>
                                 {{-- <a href="{{route('task.export', ['extension' => 'csv'])}}" class="btn btn-secondary">CSV</a> --}}
                                 <a href="{{route('task.create')}}" class="btn btn-primary">Novo</a>
                             </div>

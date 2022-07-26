@@ -156,6 +156,7 @@ class TaskController extends Controller
         $tasks = auth()->user()->tasks()->get();
 
         $pdf = PDF::loadView('task.pdf', ['tasks' => $tasks]);
-        return $pdf->download('task_list.pdf');
+        // return $pdf->download('task_list.pdf');
+        return $pdf->stream('task_list.pdf');
     }
 }
